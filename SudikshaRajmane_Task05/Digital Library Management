@@ -1,1 +1,559 @@
+package TASKS;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Scanner;
+
+public class digitallibrarymanagement {
+
+	// Login details
+	HashMap<String, Integer> loginto = new HashMap<>();
+
+	// Book database
+	HashMap<Integer, String> map = new HashMap<>();
+
+	// Current logged-in user
+	public static String userID;
+
+	// Currently issued book number
+	public static int issues = 0;
+
+	// Single Scanner
+	Scanner sc = new Scanner(System.in);
+
+	// Book database
+	public HashMap<Integer, String> book_database_server() {
+
+		map.put(1, "EE : Electric Machine-1");
+		map.put(2, "EE : Electric Machine-2");
+		map.put(3, "EE : Electric Drive");
+		map.put(4, "EE : Power System-1");
+		map.put(5, "EE : Power System-2");
+		map.put(6, "EE : Basic Electrical");
+		map.put(7, "EE : Power Electronics");
+		map.put(8, "ECE : Basic Electronics");
+		map.put(9, "ECE : Microprocessor & Microcontroller");
+		map.put(10, "ECE : Analog Electronics");
+		map.put(11, "ECE : Digital Electronics");
+		map.put(12, "CSE : C Programming");
+		map.put(13, "CSE : Java Programming");
+		map.put(14, "CSE : Artificial Intelligence");
+		map.put(15, "CSE : Object Oriented Programming (OOPs)");
+		map.put(16, "IT : Data Structures & Algorithms");
+		map.put(17, "IT : Databases - Networks");
+		map.put(18, "IT : Statistics");
+		map.put(19, "BBA : Principle of Management");
+		map.put(20, "BBA : Economics for Engineers");
+		map.put(21, "MATHS : Engineering Mathematics-1");
+		map.put(22, "MATHS : Engineering Mathematics-2");
+		map.put(23, "MATHS : Engineering Mathematics-3");
+		map.put(24, "PHYS : Physics");
+		map.put(25, "CHEM : Chemistry");
+		map.put(26, "ENG : English");
+		map.put(27, "BENG : Bengali");
+		map.put(28, "HIND : Hindi");
+		map.put(29, "EE : Control System");
+		map.put(30, "EE : Electrical Circuit Theory");
+		map.put(31, "EE : Electric & Hybrid Vehicle");
+		map.put(32, "EE : Renewable Energy Sources");
+
+		return map;
+	}
+
+	// Homepage
+	public void homepage() {
+
+		System.out.println("--------------------------------------------------------");
+		System.out.println("----- WELCOME TO DIGITAL LIBRARY MANAGEMENT SYSTEM -----");
+		System.out.println("----------------------- HOMEPAGE -----------------------");
+		System.out.println("--------------------------------------------------------");
+
+		System.out.println("Please Select One Option...\n");
+
+		System.out.println("1.>>> Admin Login >>>");
+		System.out.println("2.>>> User Login >>>");
+		System.out.println("3.>>> Exit >>>");
+
+		System.out.println("--------------------------------------------------------");
+		System.out.print("Select Option: ");
+
+		int sp = sc.nextInt();
+
+		switch (sp) {
+
+		case 1:
+			admin_login();
+			break;
+
+		case 2:
+			user_login();
+			break;
+
+		case 3:
+
+			System.out.print("\nDo You want to Exit? (Y/N): ");
+			String exit = sc.next();
+
+			if (exit.equalsIgnoreCase("Y")) {
+
+				System.out.println("\n--------------------------------------------------------");
+				System.out.println("EXITING SUCCESSFULLY...!");
+				System.out.println("--------------------------------------------------------");
+				System.out.println("Thank You.!!! Please Visit Again...");
+				System.out.println("--------------------------------------------------------");
+
+				System.exit(0);
+
+			} else {
+
+				System.out.println("\nExiting Cancelled... Stayed on the HomePage...");
+
+				homepage();
+			}
+
+			break;
+
+		default:
+
+			System.out.println("\nInvalid Option Choice.! Please Try again...");
+
+			homepage();
+			break;
+		}
+	}
+
+	// Admin Login
+	public void admin_login() {
+
+		System.out.println("--------------------------------------------------------");
+		System.out.println("------------------- ADMIN LOGIN PAGE -------------------");
+		System.out.println("--------------------------------------------------------");
+
+		System.out.print("Enter User-Id: ");
+		userID = sc.next();
+
+		System.out.print("Enter Password: ");
+		int password = sc.nextInt();
+
+		// Admin credentials
+		loginto.put("Soumya", 13579);
+		loginto.put("Soumyadip", 20026);
+
+		if (loginto.containsKey(userID) && loginto.get(userID) == password) {
+
+			System.out.println("--------------------------------------------------------");
+			System.out.println("\nLOGIN SUCCESSFULLY...!");
+			System.out.println("\n--------------------------------------------------------");
+
+			admin_mainpage();
+
+		} else {
+
+			System.out.println("\nInvalid login credentials.!!! Please try again...");
+
+			admin_login();
+		}
+	}
+
+	// User Login
+	public void user_login() {
+
+		System.out.println("--------------------------------------------------------");
+		System.out.println("-------------------- USER LOGIN PAGE -------------------");
+		System.out.println("--------------------------------------------------------");
+
+		System.out.print("Enter User-Id: ");
+		userID = sc.next();
+
+		System.out.print("Enter Password: ");
+		int password = sc.nextInt();
+
+		// User credentials
+		loginto.put("Soumya", 13579);
+		loginto.put("Soumyadip", 20026);
+		loginto.put("Soumy", 12345);
+		loginto.put("SPal", 24680);
+		loginto.put("Dip", 11111);
+
+		if (loginto.containsKey(userID) && loginto.get(userID) == password) {
+
+			System.out.println("--------------------------------------------------------");
+			System.out.println("\nLOGIN SUCCESSFULLY...!");
+			System.out.println("\n--------------------------------------------------------");
+
+			user_mainpage();
+
+		} else {
+
+			System.out.println("\nInvalid login credentials.!!! Please try again...");
+
+			user_login();
+		}
+	}
+
+	// Admin Main Page
+	public void admin_mainpage() {
+
+		System.out.println("--------------------------------------------------------");
+		System.out.println("----- Digital Library ---> Welcome Admin " + digitallibrarymanagement.userID + "! ----");
+		System.out.println("-------------------- ADMIN MAINPAGE --------------------");
+		System.out.println("--------------------------------------------------------");
+
+		System.out.println("Please Select One Option...\n");
+
+		System.out.println("1.>>> Add a New Book >>>");
+		System.out.println("2.>>> Update an Existing Book >>>");
+		System.out.println("3.>>> Delete an Existing Book >>>");
+		System.out.println("4.>>> Go To User MainPage >>>");
+		System.out.println("5.>>> Logout >>> Back to HomePage >>>");
+
+		System.out.println("--------------------------------------------------------");
+		System.out.print("Select Option: ");
+
+		int sp = sc.nextInt();
+
+		switch (sp) {
+
+		case 1:
+			map = add_new();
+			admin_mainpage();
+			break;
+
+		case 2:
+			map = upd_old();
+			admin_mainpage();
+			break;
+
+		case 3:
+			map = del_old();
+			admin_mainpage();
+			break;
+
+		case 4:
+			user_mainpage();
+			break;
+
+		case 5:
+
+			System.out.println("--------------------------------------------------------");
+			System.out.println("\nLOGOUT SUCCESSFULLY...!");
+			System.out.println("\n--------------------------------------------------------");
+
+			homepage();
+			break;
+
+		default:
+
+			System.out.println("\nInvalid Option Choice.! Please Try again...");
+
+			admin_mainpage();
+			break;
+		}
+	}
+
+	// User Main Page
+	public void user_mainpage() {
+
+		System.out.println("--------------------------------------------------------");
+		System.out.println("----- Digital Library ---> Welcome User " + digitallibrarymanagement.userID + "! -----");
+		System.out.println("--------------------- USER MAINPAGE --------------------");
+		System.out.println("--------------------------------------------------------");
+
+		System.out.println("Please Select One Option...\n");
+
+		System.out.println("1.>>> View any Book >>>");
+		System.out.println("2.>>> Issue a Book >>>");
+		System.out.println("3.>>> Return a Book >>>");
+		System.out.println("4.>>> Logout >>> Back to HomePage >>>");
+
+		System.out.println("--------------------------------------------------------");
+		System.out.print("Select Option: ");
+
+		int sp = sc.nextInt();
+
+		switch (sp) {
+
+		case 1:
+			views();
+			break;
+
+		case 2:
+			borrows();
+			break;
+
+		case 3:
+			returns();
+			break;
+
+		case 4:
+
+			System.out.println("--------------------------------------------------------");
+			System.out.println("\nLOGOUT SUCCESSFULLY...!");
+			System.out.println("\n--------------------------------------------------------");
+
+			homepage();
+			break;
+
+		default:
+
+			System.out.println("\nInvalid Option Choice.! Please Try again...");
+
+			user_mainpage();
+			break;
+		}
+	}
+
+	// Add new book
+	public HashMap<Integer, String> add_new() {
+
+		System.out.println("--------------------- ADD A NEW BOOK -------------------");
+
+		System.out.print("Enter a New Book Number: ");
+		int addbook = sc.nextInt();
+
+		if (map.containsKey(addbook)) {
+
+			System.out.println("\nThis Book Number already exists... " + "Please try with another number...");
+
+		} else if (addbook <= 0) {
+
+			System.out.println("\nYou can't assign Zero(0) or a Negative(-ve) " + "number for a book...");
+
+		} else {
+
+			sc.nextLine();
+
+			System.out.print("Enter New Book Details: ");
+			String addbookdetails = sc.nextLine();
+
+			map.put(addbook, addbookdetails);
+
+			System.out.println("\nNew Book added Successfully...");
+			System.out.println("New Book No.:: " + addbook);
+			System.out.println("New Book Name & Details:: " + map.get(addbook));
+		}
+
+		return map;
+	}
+
+	// Update existing book
+	public HashMap<Integer, String> upd_old() {
+
+		System.out.println("----------------- UPDATE A BOOK DETAILS ----------------");
+
+		System.out.print("Enter a Book No. to Update its Details: ");
+		int updbook = sc.nextInt();
+
+		if (map.containsKey(updbook)) {
+
+			System.out.println("Previous Book Name & Details:: " + map.get(updbook));
+
+			sc.nextLine();
+
+			System.out.print("Enter the Updated Book Details: ");
+			String upbookdetails = sc.nextLine();
+
+			map.replace(updbook, upbookdetails);
+
+			System.out.println("\nBook Details Updated Successfully...!");
+			System.out.println("Book No.:: " + updbook);
+			System.out.println("Updated Book Name & Details:: " + map.get(updbook));
+
+		} else {
+
+			System.out.println("\nThis Book Number is not Available...!");
+		}
+
+		return map;
+	}
+
+	// Delete existing book
+	public HashMap<Integer, String> del_old() {
+
+		System.out.println("----------------- DELETE A BOOK DETAILS ----------------");
+
+		System.out.print("Enter the Book Number, which you want to delete: ");
+
+		int delbook = sc.nextInt();
+
+		if (map.containsKey(delbook)) {
+
+			System.out.println("\nBook Details You Want to Delete...>>>");
+
+			System.out.println("Book No.:: " + delbook);
+			System.out.println("Book Name:: " + map.get(delbook));
+
+			System.out.print("\nDo You want to Delete this Book? (Y/N): ");
+
+			String delbookdetails = sc.next();
+
+			if (delbookdetails.equalsIgnoreCase("Y")) {
+
+				String returned_value = map.remove(delbook);
+
+				System.out.println("\n\"" + returned_value + "\" Book Details Deleted Successfully...");
+
+			} else {
+
+				System.out.println("\nBook Deletion Cancelled...!");
+			}
+
+		} else {
+
+			System.out.println("\nThis Book Number does not Exist.!!!");
+		}
+
+		return map;
+	}
+
+	// View books
+	public void views() {
+
+		System.out.println("--------------------------------------------------------");
+		System.out.println("---------------------- VIEW BOOKS ----------------------");
+		System.out.println("--------------------------------------------------------");
+
+		System.out.println("Please Select One Option...\n");
+
+		System.out.println("1.>>> View a Specific Book >>>");
+		System.out.println("2.>>> View all Books >>>");
+		System.out.println("3.>>> Back to MainPage >>>");
+
+		System.out.println("--------------------------------------------------------");
+		System.out.print("Select Option: ");
+
+		int dip = sc.nextInt();
+
+		switch (dip) {
+
+		case 1:
+
+			System.out.println("--------------------------------------------------------");
+			System.out.print("Enter Book Number: ");
+
+			int books = sc.nextInt();
+
+			if (map.containsKey(books)) {
+
+				System.out.println("\n" + books + " ---> " + map.get(books));
+
+			} else {
+
+				System.out.println("\nOops.! This book no. is not available... " + "Please Try Another...");
+			}
+
+			views();
+			break;
+
+		case 2:
+
+			System.out.println("\nAll Available Books...>>>\n");
+
+			for (Map.Entry<Integer, String> entry : map.entrySet()) {
+
+				int key = entry.getKey();
+				String value = entry.getValue();
+
+				System.out.println(key + " ---> " + value);
+			}
+
+			views();
+			break;
+
+		case 3:
+
+			System.out.println("--------------------------------------------------------");
+			System.out.println("\nREDIRECTING TO USER MAINPAGE...\n");
+			System.out.println("--------------------------------------------------------");
+
+			user_mainpage();
+			break;
+
+		default:
+
+			System.out.println("\nInvalid Option Choice.! Please Try again...");
+
+			views();
+			break;
+		}
+	}
+
+	// Issue a book
+	public void borrows() {
+
+		System.out.println("--------------------- ISSUE A BOOK ---------------------");
+
+		System.out.print("Enter a Book Number which You want to Issue: ");
+
+		int isbook = sc.nextInt();
+
+		if (issues == 0 && isbook > 0 && map.containsKey(isbook)) {
+
+			issues = isbook;
+
+			System.out.println("\nSuccessfully Issued the Book...");
+
+			System.out.println("Issued Book No.:: " + isbook);
+
+			System.out.println("Issued Book Name & Details:: " + map.get(isbook));
+
+		} else if (issues != 0) {
+
+			System.out
+					.println("\nYou have Already Issued a Book.! " + "Please Return that book to Issue a new book...");
+
+		} else {
+
+			System.out.println("\nInvalid Book Number or Book is not Available...");
+		}
+
+		user_mainpage();
+	}
+
+	// Return a book
+	public void returns() {
+
+		System.out.println("--------------------- RETURN A BOOK --------------------");
+
+		if (issues != 0 && map.containsKey(issues)) {
+
+			System.out.println("Issued Book Details...>>>");
+
+			System.out.println("Book No.:: " + issues);
+
+			System.out.println("Book Name:: " + map.get(issues));
+
+			System.out.print("\nDo You want to Return this Book? (Y/N): ");
+
+			String rebook = sc.next();
+
+			if (rebook.equalsIgnoreCase("Y")) {
+
+				issues = 0;
+
+				System.out.println("\nBook Returned Successfully...");
+
+			} else {
+
+				System.out.println("\nBook Return Cancelled...!");
+			}
+
+		} else {
+
+			System.out.println("\nYou don't have any issued book.!!!");
+		}
+
+		user_mainpage();
+	}
+
+	// Main method
+	public static void main(String[] args) {
+
+		digitallibrarymanagement system_run = new digitallibrarymanagement();
+
+		// Load books before starting
+		system_run.book_database_server();
+
+		system_run.homepage();
+	}
+}
